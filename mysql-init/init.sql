@@ -1,1 +1,10 @@
-Flask>=2.2.2
+CREATE DATABASE IF NOT EXISTS videos;
+
+USE videos;
+
+CREATE TABLE videos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    path VARCHAR(512) NOT NULL
+);
+

@@ -24,7 +24,7 @@ def store_file():
 
         file_path = os.path.join(UPLOAD_FOLDER, file.filename)
         
-        # Check if the directory exists
+       
         if not os.path.exists(UPLOAD_FOLDER):
             logging.debug(f"Creating directory: {UPLOAD_FOLDER}")
             os.makedirs(UPLOAD_FOLDER)
@@ -58,3 +58,4 @@ def list_files():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5003)
+

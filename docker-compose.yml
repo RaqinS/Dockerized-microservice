@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  upload-video-service:
+    build:
+      context: ./upload-video-service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql-service
+
+  video-streaming-service:
+    build:
+      context: ./video-streaming-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mysql-service
+      - file-system-service
+
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "5002:5002"
+
+  file-system-service:
+    build:
+      context: ./file-system-service
+    ports:
+      - "5003:5003"
+    volumes:
+      - uploaded-files:/app/uploads
+
+  mysql-service:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: videos
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-data:
+  uploaded-files:

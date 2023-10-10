@@ -3,7 +3,7 @@ import mysql.connector
 import requests
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Secure secret key
+app.secret_key = 'your_secret_key'  
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -33,7 +33,6 @@ def list_videos():
     if not session.get('authenticated'):
         return redirect(url_for('login'))
 
-    # Fetch list of videos from MySQL
     connection = mysql.connector.connect(user='root', password='password', host='mysql-service', database='videos')
     cursor = connection.cursor()
     cursor.execute('SELECT name, path FROM videos')
